@@ -15,6 +15,8 @@ int main(int argc, char const *argv[])
     ServerSocket server(sockaddress);
     server.displayServerInfo();
 
+    server.run();
+
     
 
     

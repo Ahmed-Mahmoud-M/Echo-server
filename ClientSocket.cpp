@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <string>
+#include "Socket.h"
 
 // Define struct socketAddress
 struct socketAddress {
@@ -27,6 +28,7 @@ public:
     int sendData(const std::string& data);
     int receiveData(std::string& buffer);
     void displayClientInfo();
+    SOCKET createClientSocket();
 
 private:
     void closeConnection();

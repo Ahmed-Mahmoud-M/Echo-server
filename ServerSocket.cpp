@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "Socket.h"
 
 // Define struct socketAddress first
 struct socketAddress {
@@ -11,7 +12,7 @@ struct socketAddress {
     }
 };
 
-class ServerSocket {
+class ServerSocket :public socket{
 public:
     socketAddress sockaddr;
     ServerSocket(); // Default constructor
@@ -22,6 +23,8 @@ public:
     int listnForConnections();
     int acceptConnection();
     void displayServerInfo();
+    SOCKET createServerSocket();
+    void run();
 };
 
 // Implement the constructors
@@ -49,4 +52,14 @@ int ServerSocket::listnForConnections() {
 int ServerSocket::acceptConnection() {
     // Implementation of acceptConnection
     return 0;
+}
+
+
+SOCKET ServerSocket::createServerSocket() {
+     
+}
+
+
+void ServerSocket::run() {
+    wsaStartup();
 }

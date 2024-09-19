@@ -1,5 +1,6 @@
 run:
-	@g++ main.cpp -o main
+	@g++ main.cpp -o main.exe -lws2_32
+
 	@./main
 
 
@@ -10,12 +11,6 @@ run:
 log:
 	git log
 
-
-
-push:
-	git add * 
-	git commit -m "add all"
-	git push
 
 
 
