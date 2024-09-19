@@ -4,7 +4,7 @@
 
 /*  this class will be a base class that
     serversocket and clientsocket will 
-    inhernt from it */
+    inhernt from it  (these methods are common between the two classes)*/
 
 class socket
 {
