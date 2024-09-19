@@ -4,13 +4,11 @@ run:
 
 
 
-add:
 
 
-commit:
 
-push:
-
+log:
+	git log
 
 
 
