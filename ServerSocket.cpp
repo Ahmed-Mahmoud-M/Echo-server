@@ -1,18 +1,14 @@
 //#include "socket.h"
-#include "SocketAddress.cpp"
+#include <iostream>
+#include <string>
 
 
 
 class ServerSocket 
 {
-
-
-private:
-    SocketAddress socketAddress;
-
 public:
-    ServerSocket();
-    ServerSocket(const SocketAddress& socketAddress);
+  
+    
     int bindsocket();
     int listnForConnections();
     int acceptConnection();
@@ -21,19 +17,39 @@ public:
 
 };
 
-ServerSocket::ServerSocket(){}
-
-
-ServerSocket::ServerSocket(const SocketAddress& address) : socketAddress(address) {
+ServerSocket::ServerSocket(){
+    
+    std::cout<< "Enter ServerSocket ip address : ";
 
 }
+
+
+
+
 
 
 
 
 void ServerSocket::displayServerInfo() {
-        std::cout << "Server is running at: " << socketAddress.toString() << std::endl;
+        
 
 }
+
+
+
+
+struct socketAddress {
+    std::string ipaddress;
+    int port;
+
+    
+    void displayInfo() {
+        std::cout << "IP Address: " << ipaddress << ", Port: " << port << std::endl;
+    }
+};
+
+
+
+
 
 

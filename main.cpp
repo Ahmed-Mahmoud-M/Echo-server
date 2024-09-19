@@ -1,9 +1,22 @@
 #include<iostream>
 
+#include "ServerSocket.cpp"
+
+
+
+
+
 
 
 int main(int argc, char const *argv[])
 {
-    std::cout << "Usage: " << argv[0] <<std::endl;
+   
+
+    ServerSocket server();
+
+    
+
+    
+    
     return 0;
 }
