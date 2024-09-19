@@ -11,8 +11,9 @@
 int main(int argc, char const *argv[])
 {
    
-
-    ServerSocket server();
+    socketAddress sockaddress ={"127.0.0.1",  200};
+    ServerSocket server(sockaddress);
+    server.displayServerInfo();
 
     
 
