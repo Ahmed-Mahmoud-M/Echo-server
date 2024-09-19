@@ -14,7 +14,6 @@ public:
    virtual int wsaStartup() = 0;
    virtual int createSocket() = 0;
    virtual int closeSocket() = 0;
-   virtual int connect() = 0;
    virtual int send(int values)=0;
    virtual int recieve()=0;
 
