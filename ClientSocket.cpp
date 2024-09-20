@@ -1,20 +1,10 @@
 #include <iostream>
 #include <string>
-#include <iostream>
-#include <string>
 #include "Socket.h"
 
-// Define struct socketAddress
-struct socketAddress {
-    std::string ipaddress;
-    int port;
 
-    void displayInfo() {
-        std::cout << "IP Address: " << ipaddress << ", Port: " << port << std::endl;
-    }
-};
 
-class ClientSocket {
+class ClientSocket : public Socket {
 public:
     socketAddress serverAddress; // Server's IP address and port
     int clientSocket;            // Socket descriptor
@@ -24,11 +14,12 @@ public:
     ClientSocket(const socketAddress& addr);
     ~ClientSocket();
 
-    int connectToServer();
+    int connectToServer(SOCKET socket);
     int sendData(const std::string& data);
     int receiveData(std::string& buffer);
     void displayClientInfo();
     SOCKET createClientSocket();
+    void run ();
 
 private:
     void closeConnection();
@@ -45,9 +36,27 @@ ClientSocket::~ClientSocket() {
     }
 }
 
-int ClientSocket::connectToServer() {
+int ClientSocket::connectToServer(SOCKET socket) {
     
-    isConnected = true; // Set to true if successful
+    isConnected = true; 
+    sockaddr_in service;
+    service.sin_family = AF_INET;
+    service.sin_port = htons(this->serverAddress.port);
+   
+    service.sin_addr.s_addr = inet_addr(this->serverAddress.ipaddress.c_str());
+
+
+    int connected = connect(socket,reinterpret_cast<SOCKADDR*>(&service),sizeof(service));
+        if (connected == SOCKET_ERROR) {
+            std::cout << "connect socket error" << WSAGetLastError()<< std::endl;
+            CloseSocket(socket);
+            WSACleanup();
+            return -1;
+        }else{
+               std::cout<< "connect() is ok"<< std::endl;
+               std::cout<< "client can send and receive"<< std::endl;
+        }
+            return 0;
     return 0;
 }
 
@@ -71,3 +80,10 @@ void ClientSocket::closeConnection() {
 
 
 
+void ClientSocket::run(){
+    wsaStartup();
+   SOCKET newsocket = createSocket();
+   connectToServer(newsocket);
+
+
+}
