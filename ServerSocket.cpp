@@ -20,7 +20,7 @@ public:
     ~ServerSocket();
 
     int bindsocket(SOCKET socket);
-    int listnForConnections();
+    int listnForConnections(SOCKET socket);
     int acceptConnection();
     void displayServerInfo();
    
@@ -60,8 +60,17 @@ int ServerSocket::bindsocket(SOCKET socket) {
             return 0;
 }
 
-int ServerSocket::listnForConnections() {
-    // Implementation of listnForConnections
+int ServerSocket::listnForConnections(SOCKET socket) {
+  int islistening = listen(socket,1);
+
+    if (islistening == SOCKET_ERROR) {
+        std::cout << "listenig error" << WSAGetLastError()<< std::endl;
+        return -1;
+    }else{
+        std::cout<< "listen() is ok" <<std::endl;
+        return 0;
+    }
+
     return 0;
 }
 
@@ -78,4 +87,5 @@ void ServerSocket::run() {
     wsaStartup();
     SOCKET newsocket = createSocket();
     bindsocket(newsocket);
+    listnForConnections(newsocket);
 }
