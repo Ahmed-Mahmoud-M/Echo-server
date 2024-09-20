@@ -13,7 +13,7 @@ class Socket
 
 public:
    
-//    virtual int closeSocket() = 0;
+
 //    virtual int send(int values)=0;
 //    virtual int recieve()=0;
 
@@ -52,6 +52,16 @@ public:
         return newsocket;
 
       }
+
+
+        virtual int CloseSocket(SOCKET socket){
+          int  x =  closesocket(socket);
+            if (x == 0) {
+                std::cout << "socket closed" << std::endl;
+                return 0;
+            }
+            return -1;
+        }
 
 
 };
