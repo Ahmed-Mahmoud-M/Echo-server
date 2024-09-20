@@ -14,8 +14,7 @@ class Socket
 public:
    
 
-//    virtual int send(int values)=0;
-//    virtual int recieve()=0;
+
 
 
    virtual int wsaStartup(){
@@ -47,7 +46,7 @@ public:
         }else{
             std::cout << "socket created createsocket() " << std::endl;
         }
-
+    
 
         return newsocket;
 
@@ -64,6 +63,16 @@ public:
         }
 
 
+};
+
+// Define struct socketAddress
+struct socketAddress {
+    std::string ipaddress;
+    int port;
+
+    void displayInfo() {
+        std::cout << "IP Address: " << ipaddress << ", Port: " << port << std::endl;
+    }
 };
 
 
