@@ -2,15 +2,7 @@
 #include <string>
 #include "Socket.h"
 
-// Define struct socketAddress first
-struct socketAddress {
-    std::string ipaddress;
-    int port;
 
-    void displayInfo() {
-        std::cout << "IP Address: " << ipaddress << ", Port: " << port << std::endl;
-    }
-};
 
 class ServerSocket :public Socket{
 public:
