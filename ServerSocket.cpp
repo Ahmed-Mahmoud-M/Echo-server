@@ -13,7 +13,7 @@ public:
 
     int bindsocket(SOCKET socket);
     int listnForConnections(SOCKET socket);
-    int acceptConnection();
+    int acceptConnection(SOCKET socket);
     void displayServerInfo();
    
     
@@ -66,9 +66,17 @@ int ServerSocket::listnForConnections(SOCKET socket) {
     return 0;
 }
 
-int ServerSocket::acceptConnection() {
-    // Implementation of acceptConnection
-    return 0;
+int ServerSocket::acceptConnection(SOCKET socket) {
+    std::cout << "Waiting for a client to connect..." << std::endl;
+
+    SOCKET clientSocket = accept(socket, nullptr, nullptr);
+    if (clientSocket == INVALID_SOCKET) {
+        std::cout << "Failed to accept connection: " << WSAGetLastError() << std::endl;
+        return -1;
+    } else {
+        std::cout << "Client connected!" << std::endl;
+        return 0;
+    }
 }
 
 
@@ -76,8 +84,50 @@ int ServerSocket::acceptConnection() {
 
 
 void ServerSocket::run() {
-    wsaStartup();
+    if (wsaStartup() != 0) {
+        std::cout << "WSAStartup failed!" << std::endl;
+        return;
+    }
+
     SOCKET newsocket = createSocket();
-    bindsocket(newsocket);
-    listnForConnections(newsocket);
+    if (newsocket == INVALID_SOCKET) {
+        std::cout << "Failed to create socket!" << std::endl;
+        WSACleanup();
+        return;
+    }
+
+    if (bindsocket(newsocket) != 0) {
+        std::cout << "Socket binding failed!" << std::endl;
+        CloseSocket(newsocket);
+        WSACleanup();
+        return;
+    }
+
+    if (listnForConnections(newsocket) != 0) {
+        std::cout << "Listening for connections failed!" << std::endl;
+        CloseSocket(newsocket);
+        WSACleanup();
+        return;
+    }
+
+    // Accept incoming connections
+    while (true) {
+        if (acceptConnection(newsocket) == 0) {
+            std::cout << "Handling the connection..." << std::endl;
+            // Handle the connection or spawn a thread here.
+        } else {
+            std::cout << "Error in accepting the connection." << std::endl;
+        }
+    }
+}
+
+
+
+
+int main(int argc, char const *argv[]) {
+    socketAddress sockaddress = {"192.168.1.73", 5555};
+    ServerSocket server(sockaddress);
+    server.displayServerInfo();
+    server.run();
+    return 0;
 }
