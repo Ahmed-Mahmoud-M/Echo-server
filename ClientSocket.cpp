@@ -87,3 +87,13 @@ void ClientSocket::run(){
 
 
 }
+
+
+
+
+int main(int argc, char const *argv[]) {
+    socketAddress sockaddress = {"192.168.1.73", 5555};
+    ClientSocket client(sockaddress);
+    client.run();
+    return 0;
+}
