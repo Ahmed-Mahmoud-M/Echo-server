@@ -12,7 +12,7 @@
 int main(int argc, char const *argv[])
 {
    
-    socketAddress sockaddress ={"127.0.0.1",  200};
+    socketAddress sockaddress ={"192.168.1.73",5555};
     // ServerSocket server(sockaddress);
     // server.displayServerInfo();
 
