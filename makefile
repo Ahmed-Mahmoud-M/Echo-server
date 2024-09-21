@@ -1,15 +1,19 @@
-run:
-	@g++ main.cpp -o main.exe -lws2_32
+client:
+	@g++ .\ClientSocket.cpp -o client -lws2_32
 
-	@./main
-
-
+	@./client
 
 
 
+server:
+	@g++ .\ServerSocket.cpp -o server -lws2_32
+	@/server
 
-log:
-	git log
+
+
+remove:
+	@rm .\client.exe
+	@rm .\server.exe
 
 
 
