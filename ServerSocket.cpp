@@ -114,11 +114,13 @@ void ServerSocket::run() {
     while (true) {
         if (acceptConnection(newsocket) == 0) {
             std::cout << "Handling the connection..." << std::endl;
-            // Handle the connection or spawn a thread here.
+           
         } else {
             std::cout << "Error in accepting the connection." << std::endl;
         }
     }
+
+    
 }
 
 
