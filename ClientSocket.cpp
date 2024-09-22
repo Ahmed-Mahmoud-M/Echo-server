@@ -12,17 +12,15 @@ public:
 
     ClientSocket();
     ClientSocket(const socketAddress& addr);
-    ~ClientSocket();
+  
 
     int connectToServer(SOCKET socket);
-    int sendData(const std::string& data);
-    int receiveData(std::string& buffer);
+    
     void displayClientInfo();
     SOCKET createClientSocket();
     void run ();
 
-private:
-    void closeConnection();
+
 };
 
 // Implement the constructors
@@ -30,11 +28,6 @@ ClientSocket::ClientSocket() : clientSocket(-1), isConnected(false) {}
 
 ClientSocket::ClientSocket(const socketAddress& addr) : serverAddress(addr), clientSocket(-1), isConnected(false) {}
 
-ClientSocket::~ClientSocket() {
-    if (isConnected) {
-        closeConnection();
-    }
-}
 
 int ClientSocket::connectToServer(SOCKET socket) {
     
@@ -60,22 +53,9 @@ int ClientSocket::connectToServer(SOCKET socket) {
     return 0;
 }
 
-int ClientSocket::sendData(const std::string& data) {
-    // Implementation of sendData
-    return 0;
-}
 
-int ClientSocket::receiveData(std::string& buffer) {
-    // Implementation of receiveData
-    return 0;
-}
 
 void ClientSocket::displayClientInfo() {
-}
-
-void ClientSocket::closeConnection() {
-    // Implementation of closing the socket
-    isConnected = false;
 }
 
 
@@ -83,7 +63,8 @@ void ClientSocket::closeConnection() {
 void ClientSocket::run(){
     wsaStartup();
    SOCKET newsocket = createSocket();
-   connectToServer(newsocket);
+    connectToServer(newsocket);
+    
 
 
 }
