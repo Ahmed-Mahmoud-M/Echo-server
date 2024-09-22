@@ -2,6 +2,7 @@
 #define E85255F8_2B93_4E42_AE91_29BDE07B014B
 
 #include <iostream>
+#include<string>
 #include <winsock2.h>
 /*  this class will be a base class that
     serversocket and clientsocket will 
@@ -63,6 +64,34 @@ public:
         }
 
 
+   
+    virtual int  sendData(SOCKET socket){
+        char * data = "";
+        std::cin.getline(data,sizeof(data));
+        int bytecount = send(socket,data,sizeof(data),0);
+        if (bytecount == SOCKET_ERROR) {
+            std::cout << "server error %d" << WSAGetLastError()<< std::endl;
+
+        }else{
+            std::cout << "server sent data : %d bytes"<<sizeof(data) <<std::endl;
+        }
+
+    }
+   virtual int receiveData(SOCKET socket){
+        char * data = "";
+        std::cin.getline(data,sizeof(data));
+        int bytecount = recv(socket,data,sizeof(data),0);
+        if (bytecount <0) {
+            std::cout << " error %d" << WSAGetLastError()<< std::endl;
+            return 1;
+
+        }else{
+            std::cout << " recieved data : %d "<<data <<std::endl;
+        }
+
+            return 0;
+   }
+
 };
 
 // Define struct socketAddress
@@ -74,6 +103,9 @@ struct socketAddress {
         std::cout << "IP Address: " << ipaddress << ", Port: " << port << std::endl;
     }
 };
+
+
+
 
 
 
